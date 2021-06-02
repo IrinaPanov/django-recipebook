@@ -1,0 +1,24 @@
+{% extends 'resbook/base.html' %}
+{% block content %}
+<ul class="list-articles">
+    {% for p in posts %}
+    <li><div class="article-panel">
+    <p class="first">Category: {{p.cat}}</p>
+    </div>
+
+{% if p.photo %}
+        <p><img class="img-article-left thumb" src="{{p.photo.url}}"></p>
+{% endif %}
+        <h2>{{p.title}}</h2>
+        <div class="article-panel">
+            <p>{{p.ingredients|truncatewords:10}}</p>
+            <p>{{p.content|linebreaks|truncatewords:40}}</p>
+        </div>
+        <h5>{{p.author}}</h5>
+        <div class="clear"></div>
+        <p class="link-read-post button"><a href="{{p.get_absolute_url}}">Read More</a></p>
+    </li>
+
+    {% endfor %}
+</ul>
+{% endblock %}
