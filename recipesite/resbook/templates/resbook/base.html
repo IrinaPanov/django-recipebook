@@ -11,50 +11,50 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg  navbar-light navbar-fixed-top">
-        <a class="navbar-brand text-light" href="{% url 'home' %}">Main Page</a>
-        <a class="navbar-brand text-light" href="{% url 'about' %}">About Us</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <a class="navbar-brand text-light" href="{% url 'home' %}">Main Page</a>
+    <a class="navbar-brand text-light" href="{% url 'about' %}">About Us</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="{% url 'addpage' %}">Add Recipe</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link text-light" href="{% url 'login' %}">Log In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Sign In</a>
-                </li>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'addpage' %}">Add Recipe</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link text-light" href="{% url 'login' %}">Log In</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" href="#">Sign In</a>
+            </li>
 
-            </ul>
-        </div>
-    </nav>
+        </ul>
+    </div>
+</nav>
 
 
 <table class="table-content" border="0" cellpadding="0" cellspacing="0">
     <tr>
         <td valign="top" class="left-chapters">
 
-        <ul id="leftchapters">
-{% if cat_selected == 0 %}
+            <ul id="leftchapters">
+                {% if cat_selected == 0 %}
                 <li class="selected">Recipes</li>
-{% else %}
+                {% else %}
                 <li><a href="{% url 'home' %}">Recipes</a></li>
-{% endif %}
+                {% endif %}
 
-{% for c in cats %}
-{% if c.women__count > 0 %}
-     {% if c.pk == cat_selected %}
-            <li class = "selected">{{c.name}}</li>
-     {% else %}
-            <li><a href="{{c.get_absolute_url}}">{{c.name}}</a></li>
-     {% endif %}
-{% endif %}
-{% endfor %}
-
+                {% for c in cats %}
+                {% if c.recipes__count > 0 %}
+                {% if c.pk == cat_selected %}
+                <li class="selected">{{c.name}}</li>
+                {% else %}
+                <li><a href="{{ c.get_absolute_url }}">{{c.name}}</a></li>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
 
 
                 <li class="share">
@@ -70,6 +70,35 @@
             <div class="content-text">
                 {% block content %}
                 {% endblock %}
+                {% if page_obj.has_other_pages %}
+            <nav class="list-pages">
+                <ul>
+                {%  if page_obj.has_previous %}
+                    <li class="page-num">
+                    <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+                    </li>
+                    {% endif %}
+
+
+                    {%  for p in paginator.page_range %}
+                    {% if page_obj.number == p %}
+                        <li class="page-num page-num-selected">{{ p }}</li>
+                    {%  elif p >= page_obj.number|add:-1 and p <= page_obj.number|add:1 %}
+                    <li class="page-num">
+                        <a href="?page={{ p }}">{{ p }}</a>
+                    </li>
+                    {%  endif %}
+                    {%  endfor %}
+
+                {%  if page_obj.has_next %}
+                    <li class="page-num">
+                    <a href="?page= {{ page_obj.next_page_number }}">&lt;</a>
+                    </li>
+                {% endif %}
+
+                </ul>
+            </nav>
+            {%  endif %}
             </div>
         </td>
     </tr>
