@@ -1,14 +1,14 @@
 {% extends 'resbook/base.html' %}
 
 {% block content %}
-<h1 style="color: #333671"> {{post.title}}</h1>
+    <h1 style="color: #333671"> {{ post.title }}</h1>
 
-{% if post.photo %}
-<p><img src="{{post.photo.url}}"></p>
-{% endif %}
-<p style="color: #717171">Ingredients:</p>
-{{post.ingredients|linebreaks}}
-<p style="color: #717171">Directions:</p>
-{{post.content|linebreaks}}
-<p style="color: #717171"> {{post.author}}</p>
+    {% if post.photo %}
+        <p><img src="{{ post.photo.url }}"></p>
+    {% endif %}
+    <p style="color: #717171">Ingredients:</p>
+    {{ post.ingredients|linebreaks }}
+    <p style="color: #717171">Directions:</p>
+    {{ post.content|linebreaks }}
+    <p style="color: #717171"> {{ post.author }}</p>
 {% endblock %}

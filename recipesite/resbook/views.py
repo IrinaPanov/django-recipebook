@@ -1,11 +1,10 @@
-from django.http import HttpResponse, Http404, HttpResponseNotFound
-from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse, HttpResponseNotFound
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import *
-from .models import *
 from .utils import *
 
 
