@@ -1,7 +1,9 @@
 from django import template
+
 from resbook.models import *
 
 register = template.Library()
+
 
 @register.simple_tag(name="getcats")
 def get_categories():
@@ -12,4 +14,3 @@ def get_categories():
 def show_categories():
     cats = Category.objects.all()
     return {"cats": cats}
-
