@@ -20,15 +20,21 @@
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
+            {% if request.user.is_authenticated %}
             <li class="nav-item">
                 <a class="nav-link text-light" href="{% url 'addpage' %}">Add Recipe</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'signout' %}">Sign Out</a>
+            </li>
+            {% else %}
             <li class="nav-item active">
                 <a class="nav-link text-light" href="{% url 'login' %}">Log In</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-light" href="{% url 'signin' %}">Sign In</a>
             </li>
+            {% endif %}
 
         </ul>
     </div>
