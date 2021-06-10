@@ -24,7 +24,7 @@ class RecipesHome(DataMixin, ListView):
         return dict(list(context.items()) + list(c_def.items()))
 
     def get_queryset(self):
-        return Recipes.objects.filter(is_published=True)
+        return Recipes.objects.filter(is_published=True).select_related('cat')
 
 
 def pageNotFound(request, exception):
@@ -42,12 +42,13 @@ class RecipesCategory(DataMixin, ListView):
     allow_empty = False
 
     def get_queryset(self):
-        return Recipes.objects.filter(cat__slug=self.kwargs['cat_slug'], is_published=True)
+        return Recipes.objects.filter(cat__slug=self.kwargs['cat_slug'], is_published=True).select_related('cat')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title="Category-" + str(context['posts'][0].cat),
-                                      cat_selected=context['posts'][0].cat_id)
+        c = Category.objects.get(slug=self.kwargs['cat_slug'])
+        c_def = self.get_user_context(title="Category-" + str(c.name),
+                                      cat_selected=c.pk)
         return dict(list(context.items()) + list(c_def.items()))
 
 
