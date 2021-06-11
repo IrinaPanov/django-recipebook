@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from django.db.models import Count
 
 from .models import *
@@ -8,7 +9,10 @@ class DataMixin:
 
     def get_user_context(self, **kwargs):
         context = kwargs
-        cats = Category.objects.annotate(Count('recipes'))
+        cats = cache.get('cats')
+        if not cats:
+            cats = Category.objects.annotate(Count('recipes'))
+            cache.set('cats', cats, 60)
 
         context['cats'] = cats
         if 'cat_selected' not in context:
