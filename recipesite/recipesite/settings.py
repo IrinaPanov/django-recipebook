@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'captcha',
     'resbook.apps.ResbookConfig',
 ]
 
@@ -120,7 +121,6 @@ STATICFILES_DIRS = []
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
 
 INTERNAL_IPS = [
     '127.0.0.1',
