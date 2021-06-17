@@ -1,16 +1,25 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 
 from resbook.models import *
 
 
 # Register your models here.
 class RecipesAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'time_create', 'photo', 'author', 'is_published')
+    list_display = ('id', 'title', 'time_create', 'get_html_photo', 'author', 'is_published')
     list_display_links = ('id', 'title')
     search_fields = ('title', 'content', 'author')
     list_editable = ('is_published',)
     list_filter = ('is_published', 'time_create')
     prepopulated_fields = {"slug": ("title",)}
+    fields = ('title', 'slug', 'cat', 'content', 'photo', 'get_html_photo', 'is_published')
+    readonly_fields = ('time_create', 'time_update', 'get_html_photo')
+
+    def get_html_photo(self, object):
+        if object.photo:
+            return mark_safe(f"<img src='{object.photo.url}' width=50")
+
+    get_html_photo.short_description = "Image"
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -23,3 +32,6 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(UserProfileInfo)
 admin.site.register(Recipes, RecipesAdmin)
 admin.site.register(Category, CategoryAdmin)
+
+admin.site.site_title = 'Recipe book'
+admin.site.site_header = 'Recipe book'
