@@ -1,7 +1,9 @@
 {% extends 'resbook/base.html' %}
 
 {% block content %}
-    <p>About Us</p>
+    <h3>About RecipeBook</h3>
+    <p>Keep your recipes online, and access them from any web browser!</p>
+    <h3>Contact Us</h3>
     <form method="post">
         {% csrf_token %}
         <div class="form-error">{{ form.non_field_errors }}</div>
@@ -10,6 +12,8 @@
             <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}: </label>{{ f }}</p>
             <div class="form-error">{{ f.errors }}</div>
         {% endfor %}
+         <h6>Important Reminder: We care about your privacy, so please do not include in your message any sensitive personal information.</h6>
         <button type="submit">Send</button>
     </form>
 {% endblock %}
+
