@@ -283,3 +283,7 @@ footer a {
 .list-pages .page-num-selected:hover {
     box-shadow: none;
 }
+h3{
+    color: #333671;
+    text-decoration: underline;
+}
