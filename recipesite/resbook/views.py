@@ -120,3 +120,17 @@ class LoginUser(DataMixin, LoginView):
 def logout_user(request):
     logout(request)
     return redirect('login')
+
+
+class KidsMenu(DataMixin, ListView):
+    model = Recipes
+    template_name = 'resbook/kids_menu.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        return Recipes.objects.filter(cat=6, is_published=True)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(titile='kidsmenu')
+        return dict(list(context.items()) + list(c_def.items()))

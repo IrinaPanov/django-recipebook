@@ -10,6 +10,7 @@ urlpatterns = [
     path(r'signin/', RegisterUser.as_view(), name='signin'),
     path(r'addpage/', AddPage.as_view(), name='addpage'),
     path(r'sigout/', views.logout_user, name='signout'),
+    path(r'kidsmenu/', KidsMenu.as_view(), name='kidsmenu'),
     path('post/<slug:post_slug>/', ShowPost.as_view(), name='post'),
     path('category/<slug:cat_slug>/', RecipesCategory.as_view(), name='category'),
 ]
