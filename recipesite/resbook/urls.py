@@ -13,4 +13,5 @@ urlpatterns = [
     path(r'kidsmenu/', KidsMenu.as_view(), name='kidsmenu'),
     path('post/<slug:post_slug>/', ShowPost.as_view(), name='post'),
     path('category/<slug:cat_slug>/', RecipesCategory.as_view(), name='category'),
+    path(r'learnmore/', views.learnmore, name='learnmore'),
 ]
