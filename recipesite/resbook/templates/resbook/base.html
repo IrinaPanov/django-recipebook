@@ -11,7 +11,8 @@
 <body>
 <nav class="navbar navbar-expand-lg  navbar-light navbar-fixed-top">
     <a class="navbar-brand text-light" href="{% url 'home' %}">RecipeBook</a>
-    <a class="navbar-brand text-light" href="{% url 'about' %}">About Us/Contact Us</a>
+    <a class="navbar-brand text-light" href="{% url 'about' %}">Contact Us</a>
+    <a class="navbar-brand text-light" href="{% url 'learnmore' %}">Learn More</a>
     <a class="navbar-brand text-light" href="{% url 'kidsmenu' %}">Kids Menu</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,11 +63,6 @@
                     {% endif %}
                 {% endfor %}
 
-
-                <li class="share">
-                    <p>Our channel</p>
-                    <a class="share-yt" href="https://www.youtube.com/"></a>
-                </li>
             </ul>
         </td>
         <td valign="top" class="content">
