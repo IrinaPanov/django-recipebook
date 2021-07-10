@@ -2,7 +2,7 @@ from django.contrib.auth import logout, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponseNotFound, HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, FormView
 
@@ -137,4 +137,4 @@ class KidsMenu(DataMixin, ListView):
 
 
 def learnmore(request):
-    return HttpResponse('<h4>Learn More </h4>')
+    return render(request, "learnmore.html")
