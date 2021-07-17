@@ -138,3 +138,5 @@ class KidsMenu(DataMixin, ListView):
 
 def learnmore(request):
     return render(request, 'resbook/learnmore.html')
+def cooking(request):
+    return render(request, 'resbook/cooking.html')
